@@ -29,7 +29,7 @@ The following additional parameters are accepted:
 
 # Acknowledgements
 
-When using the algorithm, please cite
+When using the dataset, please cite
 
 ```
 @inproceedings{HEB2023,
