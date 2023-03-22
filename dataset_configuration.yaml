@@ -1,0 +1,39 @@
+TRAIN_SCENES:
+  - name: "NYC_Library"
+    filename: "NYC_Library_homographies.h5"
+    scale: 6.95844
+  - name: "Alamo"
+    filename: "Alamo_homographies.h5"
+    scale: 3.97745
+
+TEST_SCENES:
+  - name: "Yorkminster"
+    filename: "Yorkminster_homographies.h5"
+    scale: 13.26471
+  - name: "Tower_of_London"
+    filename: "Tower_of_London_homographies.h5"
+    scale: 15.72399
+  - name: "Madrid_Metropolis"
+    filename: "Madrid_Metropolis_homographies.h5"
+    scale: 14.44161
+  - name: "Ellis_Island"
+    filename: "Ellis_Island_homographies.h5"
+    scale: 0.94967
+  - name: "Roman_Forum"
+    filename: "Roman_Forum_homographies.h5"
+    scale: 24.38904
+  - name: "Vienna_Cathedral"
+    filename: "Vienna_Cathedral_homographies.h5"
+    scale: 15.07437
+  - name: "Piazza_del_Popolo"
+    filename: "Piazza_del_Popolo_homographies.h5"
+    scale: 6.25074
+  - name: "Union_Square"
+    filename: "Union_Square_homographies.h5"
+    scale: 6.85125
+  - name: "Alamo"
+    filename: "Alamo_homographies.h5"
+    scale: 3.97745
+  - name: "NYC_Library"
+    filename: "NYC_Library_homographies.h5"
+    scale: 6.95844
