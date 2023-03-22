@@ -104,7 +104,7 @@ def estimate_homographies(pairs, data, scene_scale, args):
         absolute_translation_errors[k] = results[i][5]
     return times, errors, rotation_errors, translation_errors, inlier_numbers, absolute_translation_errors
 
-def opencv_flag(name)
+def opencv_flag(name):
     if name == "RANSAC":
         return cv2.RANSAC
     if name == "LMEDS":
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     parser.add_argument("--inlier_threshold", type=float, default=15.0)
     parser.add_argument("--maximum_iterations", type=int, default=1000)
     parser.add_argument("--core_number", type=int, default=4)
-    parser.add_argument("--opencv_flag", type=int, default="RANSAC", choices=["RANSAC", "LMEDS", "RHO", "USAC_MAGSAC"])
+    parser.add_argument("--opencv_flag", type=str, default="RANSAC", choices=["RANSAC", "LMEDS", "RHO", "USAC_MAGSAC"])
     args = parser.parse_args()
     
     split = args.split.upper()
