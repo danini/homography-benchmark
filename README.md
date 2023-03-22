@@ -27,6 +27,16 @@ The following additional parameters are accepted:
 --opencv_flag = { RANSAC, LMEDS, RHO, USAC_MAGSAC } - The flag to select the robust estimator from OpenCV
 ```
 
+# Benchmarking results
+
+Results with traditional methods with and without SNN filtering.
+
+![results_traditional](assets/heb_benchmark_traditional.png)
+
+Results with deep filtering.
+
+![results_deep](assets/heb_benchmark_deep.png)
+
 # Acknowledgements
 
 When using the dataset, please cite
