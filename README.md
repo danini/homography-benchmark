@@ -2,6 +2,11 @@
 
 The dataset is available at [link](https://polybox.ethz.ch/index.php/s/R5sPelZ8688It92).
 
+# Requirements
+
+- Eigen 3.0 or higher
+- OpenCV 3.0 or higher
+
 # Running homography estimation with OpenCV
 
 The tests runnin OpenCV can be started by calling
@@ -20,4 +25,18 @@ The following additional parameters are accepted:
 --maximum_iterations - The maximum number of RANSAC iterations. Default: 1000
 --core_number - The core number for the parallel processing
 --opencv_flag = { RANSAC, LMEDS, RHO, USAC_MAGSAC } - The flag to select the robust estimator from OpenCV
+```
+
+# Acknowledgements
+
+When using the dataset, please cite
+
+```
+@inproceedings{HEB2023,
+	author = {Daniel Barath, Dymtro Mishkin, Michal Polic, Wolfgang Förstner, Jiri Matas},
+	title = {A Large Scale Homography Benchmark},
+	booktitle = {Conference on Computer Vision and Pattern Recognition},
+	year = {2023},
+}
+
 ```
