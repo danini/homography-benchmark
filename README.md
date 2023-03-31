@@ -120,13 +120,18 @@ When using the dataset, please cite
 ## References
 <a id="1">[1]</a> 
 Chum, Ondrej, and Jiri Matas. "Matching with PROSAC-progressive sample consensus." 2005 IEEE computer society conference on computer vision and pattern recognition (CVPR'05). Vol. 1. IEEE, 2005.
+
 <a id="2">[2]</a> 
 Barath, Daniel, et al. "MAGSAC++, a fast, reliable and accurate robust estimator." Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2020.
+
 <a id="3">[3]</a> 
 Brachmann, Eric, and Carsten Rother. "Neural-guided RANSAC: Learning where to sample model hypotheses." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2019.
+
 <a id="4">[4]</a> 
 Tong, Wei, Jiri Matas, and Daniel Barath. "Deep magsac++." arXiv preprint arXiv:2111.14093 (2021).
+
 <a id="5">[5]</a> 
 Barath, Daniel, and Zuzana Kukelova. "Homography from two orientation-and scale-covariant features." Proceedings of the IEEE/CVF International Conference on Computer Vision. 2019.
+
 <a id="6">[6]</a> 
 Barath, Daniel, and Levente Hajder. "A theory of point-wise homography estimation." Pattern Recognition Letters 94 (2017): 7-14.
