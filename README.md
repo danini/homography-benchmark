@@ -93,6 +93,40 @@ The following additional parameters are accepted:
 --core_number - The core number for the parallel processing. Default: 4
 ```
 
+# Running homography estimation with other libs
+
+We support a series of other libraries. For supported the CLI options, please run 
+
+```bash 
+$ python test_LIBNAME.py --help
+```
+where LIBNAME can be one of `[kornia, pydegensac, skimage, vsac]`
+
+## Installations
+
+### kornia
+
+```bash
+pip install kornia
+```
+
+### skimage
+
+```bash
+pip install scikit-image
+```
+
+### pycolmap
+
+```bash
+pip install pycolmap
+```
+
+### vsac
+
+Please, refer to [author's repo](https://github.com/ivashmak/vsac)
+
+
 # Benchmarking results
 
 Results with traditional methods with and without SNN filtering.
