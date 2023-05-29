@@ -110,6 +110,12 @@ where LIBNAME can be one of `[kornia, pydegensac, skimage, vsac]`
 pip install kornia
 ```
 
+### pydegensac
+
+```bash
+pip install pydegensac
+```
+
 ### skimage
 
 ```bash
