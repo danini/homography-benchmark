@@ -109,7 +109,7 @@ When using the dataset, please cite
 
 ```
 @inproceedings{HEB2023,
-	author = {Daniel Barath, Dymtro Mishkin, Michal Polic, Wolfgang Förstner, Jiri Matas},
+	author = {Daniel Barath, Dmytro Mishkin, Michal Polic, Wolfgang Förstner, Jiri Matas},
 	title = {A Large Scale Homography Benchmark},
 	booktitle = {Conference on Computer Vision and Pattern Recognition},
 	year = {2023},
