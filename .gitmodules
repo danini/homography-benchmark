@@ -1,0 +1,3 @@
+[submodule "third_party/OANet"]
+	path = third_party/OANet
+	url = https://github.com/zjhthu/OANet.git
