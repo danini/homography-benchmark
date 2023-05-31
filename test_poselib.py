@@ -46,7 +46,7 @@ def run_poselib(pair, scene_scale, matches, relative_pose, image_size1, image_si
     ransac_options = {"max_iterations": args.maximum_iterations,
                       "min_iterations":  args.minimum_iterations,
                       "success_prob": args.confidence,
-                      "ransac_opt.max_reproj_error": args.inlier_threshold,
+                      "max_reproj_error": args.inlier_threshold,
                       "progressive_sampling": args.sampler.lower() == 'prosac'}
 
     # Return if there are fewer than 4 correspondences
