@@ -1,0 +1,14 @@
+name: sift_uncertatinty
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - tqdm
+  - pip  
+  - pip:
+      - opencv-python==4.3.0.36
+      - matplotlib>=3.1.3
+      - scipy
+      - numpy>=1.18.1
+      - h5py
