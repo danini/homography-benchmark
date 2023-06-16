@@ -132,6 +132,28 @@ pip install pycolmap
 
 Please, refer to [author's repo](https://github.com/ivashmak/vsac)
 
+## Deep prefiltering.
+
+Due different version of frameworks and difference frameworks themselves, required to run resp. networks, we provide the code for `OANet` and `AdaLAM` only.
+We might add more networks later.
+AdaLAM is available via `kornia`. To have OANet, please, close it into `thrid_party/OANet`, and download the wetwork weights as well. 
+
+
+To run the deep prefiltering method, run the following
+```bash
+python -utt run_deep_prefiltering.py --path PATH_TO_DATASET -deepmethod AdaLAM --save_to_dir deep_filtered
+```
+This will save the correspondence confidence values to `deep_filtered/AdaLAM`
+
+To run any of provided RANSACs with deep methods instead of SNN ratio, specify `--path_to_deep_prefiltered_dir` and  `--deep_confidence_th`.
+
+For example, to run OpenCV MAGSAC++ with AdaLAM on `NYC_Library` , run 
+
+```bash
+python -utt test_opencv.py --split train --scene NYC_Library --inlier_threshold 1.0 --opencv_flag USAC_MAGSAC --maximum_iterations 1000 --core_number 8 --path PATH --path_to_deep_prefiltered_dir deep_filtered/AdaLAM --deep_confidence_th 0.5
+```
+
+
 
 # Benchmarking results
 

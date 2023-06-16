@@ -12,7 +12,7 @@ from tqdm import tqdm
 from errors import reprojection_error, homography_pose_error, calc_mAA, calc_mAA_pose, homography_pose_error, reprojection_error
 import pymagsac
 
-def run_magsac(pair, scene_scale, matches, relative_pose, image_size1, image_size2, K1, K2, args):
+def run_magsac(pair, scene_scale, matches, relative_pose, image_size1, image_size2, K1, K2, deep_confidence, args):
     # Initialize the errors
     error = 1e10
     rotation_error = 1e10
@@ -24,8 +24,12 @@ def run_magsac(pair, scene_scale, matches, relative_pose, image_size1, image_siz
     # A flag determining whether the point is GT inlier or not.
     is_inlier_gt = matches[:,9].astype(bool)
     
-    # Filter by the SNN ratio threshold
-    snn_mask = snn_ratio < args.snn_threshold
+    if deep_confidence is not None:
+        # Filter by the SNN ratio threshold
+        snn_mask = deep_confidence >= args.deep_confidence_th
+    else:
+        # Filter by the SNN ratio threshold
+        snn_mask = snn_ratio < args.snn_threshold
     # The point correspondences
     correspondences = matches[snn_mask, :4].astype(np.float64)
     # SIFT angles in the source image
@@ -87,7 +91,7 @@ def run_magsac(pair, scene_scale, matches, relative_pose, image_size1, image_siz
 
     return runtime, error, rotation_error, translation_error, inlier_number, absolute_translation_error
 
-def estimate_homographies(pairs, data, scene_scale, args):
+def estimate_homographies(pairs, data, scene_scale,deep_confidence_h5,args):
     assert args.snn_threshold > 0
     assert args.inlier_threshold > 0
     assert args.maximum_iterations > 0
@@ -111,6 +115,7 @@ def estimate_homographies(pairs, data, scene_scale, args):
         data[f"size_{ '_'.join(pairs[k].split('_')[3:6]) }"], # The size of the destination image
         data[f"K_{ '_'.join(pairs[k].split('_')[0:3]) }"], # The intrinsic matrix of the source image
         data[f"K_{ '_'.join(pairs[k].split('_')[3:6]) }"], # The intrinsic matrix of the destination image
+        deep_confidence_h5[f'{pairs[k]}'] if deep_confidence_h5 is not None else None, # The deep score 
         args) for k in tqdm(keys)) # Other parameters
 
     for i, k in enumerate(keys):
@@ -150,7 +155,9 @@ if __name__ == "__main__":
     parser.add_argument("--sampler", type=str, help="Choose from: Uniform, PROSAC, PNAPSAC, Importance, ARSampler.", choices=["Uniform", "PROSAC", "PNAPSAC", "Importance", "ARSampler"], default="PROSAC")
     parser.add_argument("--use_magsac_plus_plus", type=bool, default=True)
     parser.add_argument("--core_number", type=int, default=4)
-
+    parser.add_argument("--path_to_deep_prefiltered_dir", type=str, default='',  help='If path is provided, the deep prefiltered match confidence is used instead of snn_ratio')
+    parser.add_argument("--deep_confidence_th", type=float, default=0.5,  help='Deep filtering threshold. Bigger is stricter. Works only if --path_to_deep_prefiltered_dir is presented')
+    
     args = parser.parse_args()
     
     split = args.split.upper()
@@ -173,7 +180,14 @@ if __name__ == "__main__":
         # Check if the method should run on a single scene
         if args.scene != "all" and scene['name'] != args.scene:
             continue
-        
+        deep_confidence_h5 = None
+        if len(args.path_to_deep_prefiltered_dir) > 0:
+            deepdir_files = os.listdir(args.path_to_deep_prefiltered_dir)
+            for f in deepdir_files:
+                if scene['name'].lower() in f.lower():
+                    dcf = os.path.join(args.path_to_deep_prefiltered_dir, f)
+                    print (f"Loading deep confidence file {dcf}")
+                    deep_confidence_h5 = load_h5(dcf)
         print(100 * "-")
         print(f"Loading scene '{scene['name']}'")
         print(100 * "-")
@@ -189,7 +203,7 @@ if __name__ == "__main__":
         print(f"{len(pairs)} image pairs are loaded.")
         
         # Run homography estimation on the entire scene
-        times, errors, rotation_errors, translation_errors, inlier_numbers, absolute_translation_errors = estimate_homographies(pairs, data, scale, args)
+        times, errors, rotation_errors, translation_errors, inlier_numbers, absolute_translation_errors = estimate_homographies(pairs, data, scale, deep_confidence_h5, args)
         
         # Calculating the pose error as the maximum of the rotation and translation errors
         maximum_pose_errors = {}
